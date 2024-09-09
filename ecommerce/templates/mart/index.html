@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %} {% endblock title %} 
+
+{% block content %}
+
+
+  <body>
+    <h1>Welcome to the Product Selection Page</h1>
+    <!-- Form without action to submit to the current view (index) -->
+    <form method="post">
+      {% csrf_token %}
+      <h2>Products List</h2>
+      {% for product in products %}
+      <label for="product_{{ product.id }}">
+        <input
+          type="checkbox"
+          name="selected_products"
+          id="product_{{ product.id }}"
+          value="{{ product.id }}"
+        />
+        {{ product.name }} - ${{ product.price }}
+      </label>
+      <br />
+      {% endfor %}
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
+
+{% endblock content %}
